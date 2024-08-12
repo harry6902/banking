@@ -201,8 +201,8 @@ export const authFormSchema =(type:string)=> z.object({
   firstName:type==='signin'? z.string().optional():z.string().min(3) ,
   lastName:type==='signin'? z.string().optional():z.string().min(3) ,
   address1:type==='signin'? z.string().optional():z.string().max(50) ,
-  state:type==='signin'? z.string().optional():z.string().min(3).max(20),
-  postalCode:type==='signin'? z.string().optional():z.string().min(6).max(6),
+  state:type==='signin'? z.string().optional():z.string().min(2).max(20),
+  postalCode:type==='signin'? z.string().optional():z.string().min(5).max(6),
   city:type==='signin'? z.string().optional():z.string().min(3).max(20),
 
   dateOfBirth:type==='signin'? z.string().optional():z.string().min(3),

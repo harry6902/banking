@@ -22,6 +22,7 @@ import { Loader2 } from 'lucide-react'
 import { execFile } from 'child_process'
 import { useRouter } from 'next/navigation'
 import { signIn, signUp } from '@/lib/actions/user.actions'
+import PlaidLink from './PlaidLink'
 
 
 
@@ -54,8 +55,21 @@ const AuthForm = ({type}:{type:string}) => {
 
       if(type==='signup'){
 
+        const userdata ={
+          firstName: data.firstName!,
+          lastName: data.lastName!,
+          address1: data.address1!,
+          city: data.city!,
+          state: data.state!,
+          postalCode: data.postalCode!,
+          dateOfBirth: data.dateOfBirth!,
+          ssn: data.ssn!,
+          email: data.email,
+          password: data.password
+        }
 
-        const newUser = await signUp(data);
+
+        const newUser = await signUp(userdata);
         setUser(newUser);
 
       }
@@ -116,13 +130,15 @@ const AuthForm = ({type}:{type:string}) => {
 
       </header>
 
-      {
-        user ? (
+       { user ? ( 
             <div className='flex flex-col gap-4'>
-                {/*Plaid Link*/}
+                <PlaidLink
+                user={user}
+                variant="primary"
+                
+                />
             </div>
-        ):
-        (
+         ):( 
             <>
              <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -238,8 +254,7 @@ const AuthForm = ({type}:{type:string}) => {
 
     </footer>
             </>
-        )
-      }
+         ) } 
     </section>
   )
 }
